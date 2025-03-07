@@ -18,8 +18,9 @@ const Login = () => {
         if (localStorage.getItem('Token')) {
             localStorage.removeItem('Token')
         }
-        localStorage.setItem('Token', token)
+        localStorage.setItem('Id', Responce.data.payload.userId)
         localStorage.setItem('User', Responce.data.payload.UserName)
+        localStorage.setItem('Token', token)
         if (Responce.status === 200) {
             toast.success('You are successfully Login', {
                 position: "top-center",

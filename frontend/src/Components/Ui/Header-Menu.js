@@ -3,14 +3,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import { TiThMenu } from "react-icons/ti";
-import { InstanceUrlPost } from "../../services/InstancePost";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import InstanceUrl from "../../services/Instance";
 
 const Header_menu = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [user, setUser] = useState({});
     const navigate = useNavigate();
-
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -20,17 +19,21 @@ const Header_menu = () => {
     };
 
     const getprofile = async () => {
-        // const id = localStorage.getItem('ID');
-        const id = 5;
-        const Responce = await InstanceUrlPost(`/profile?${id}`);
+        const id = localStorage.getItem('Id');
 
-        if (!Responce) {
+        if (!id) {
+            throw new Error({ message: 'id does not found' })
+        }
+        const responce = await InstanceUrl.get(`/profile/${id}`);
+
+        if (!responce) {
             throw new Error({ message: "Responce Failed" })
         }
+        const User = responce.data.user;
 
-        const User = Responce.data.User;
         setUser(User);
-        navigate('/getuser', { state: user })
+        console.log(user)
+        navigate(`/getuser/${id}`, { state: user })
     }
 
     return (

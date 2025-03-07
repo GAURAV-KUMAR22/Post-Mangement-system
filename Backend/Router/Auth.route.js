@@ -9,7 +9,7 @@ route.post('/login', controller.LoginUser);
 route.post('/forgot-password', AuthenticationCheck, controller.ForgotPassword);
 route.post('/reset-password/?', AuthenticationCheck, controller.ResetPassword);
 route.get('/logout', AuthenticationCheck, controller.Logout);
-route.get('/profile', AuthenticationCheck, controller.GetAllDetails)
+route.get('/profile/:id', controller.getUser)
 route.put('/profile/update/:id', AuthenticationCheck, controller.UpdateProfile)
 
 export default route;

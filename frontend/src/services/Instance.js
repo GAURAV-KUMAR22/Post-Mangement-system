@@ -3,14 +3,13 @@ import axios from "axios";
 
 const InstanceUrl = axios.create({
     baseURL: 'http://localhost:5000/api/auth/',
-    timeout: 5000, // Increased timeout to prevent errors
+    timeout: 50000, // Increased timeout to prevent errors
     headers: {
         'Content-Type': 'application/json',
     },
     withCredentials: true
 });
 
-// ✅ Interceptor to dynamically add the latest token
 InstanceUrl.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('Token'); // Get the latest token

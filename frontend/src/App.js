@@ -25,7 +25,7 @@ function App() {
             <Route path='/reset-password/?' element={<ResetPassword />}></Route>
             <Route path='/new-post' element={<NewPost />}></Route>
             <Route path='/posts' element={<PostUi />}></Route>
-            <Route path='/getUser' element={<GetUser />}></Route>
+            <Route path='/getuser/:id' element={<GetUser />}></Route>
           </Route>
         </Routes>
         <ToastContainer

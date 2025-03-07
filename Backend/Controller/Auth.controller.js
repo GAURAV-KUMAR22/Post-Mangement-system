@@ -3,6 +3,7 @@ import JWT from 'jsonwebtoken'
 import bcrypt from 'bcrypt';
 import nodemailer from 'nodemailer'
 import crypto from 'crypto';
+import mongoose, { get } from "mongoose";
 
 async function RagisterUser(req, res, next) {
     const data = req.body;
@@ -45,7 +46,7 @@ async function LoginUser(req, res, next) {
         };
 
         const Token = JWT.sign({ id: existingUser._id, email: email }, process.env.SECRET_KEY);
-        const payload = { Token: Token, UserName: existingUser.userName }
+        const payload = { Token: Token, UserName: existingUser.userName, userId: existingUser._id }
         return res.status(200).send({ message: 'User Login Succussfully', payload });
 
     } catch (error) {
@@ -162,55 +163,61 @@ async function UpdateProfile(req, res, next) {
     const data = req.body;
     const id = req.params;
     console.log(data, id)
-    try {
 
-        const { profile } = data;
-        if (!id) {
-            return res.status(400).json({ message: "Id Does not exist" })
-        }
-        const existingUser = await User.findOne({ _id: id });
 
-        if (!existingUser) {
-            return res.status(400).json({ message: "User Does not exist" })
-        };
-
-        const user = new User({
-            profile: profile
-        })
-
-        await user.save();
-        return res.status(200).send({ message: "Profile-picture successfully updated" })
-    } catch (error) {
-        return res.status(500).json({ message: "Internal server error" })
+    const { profile } = data;
+    if (!id) {
+        return res.status(400).json({ message: "Id Does not exist" })
     }
+    const existingUser = await User.findOne({ _id: id }).exec();
+
+    if (!existingUser) {
+        return res.status(400).json({ message: "User Does not exist" })
+    };
+
+    const user = new User({
+        profile: profile
+    })
+
+    await user.save();
+    return res.status(200).send({ message: "Profile-picture successfully updated" })
+
 };
-
-async function GetAllDetails(req, res, next) {
-    const userId = req.user
+async function getUser(req, res, next) {
+    const userId = req.params.id;
     try {
+
         if (!userId) {
-            return res.status(400).json({ message: "UserId Does not exist" })
+            return res.status(401).json({ message: "Unauthorized: No user found" });
         }
 
-        const existingUser = await User.findOne({ _id: userId });
 
-        if (!existingUser) {
-            return res.status(400).json({ message: "User Does not exist" })
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({ message: "Invalid user ID format" });
         }
 
-        const userDetails = existingUser.toObject();
 
-        delete userDetails.password;
-        delete userDetails.resetPasswordToken;
+        const user = await User.findById(userId).select("-password -resetPasswordToken");
 
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
 
-        return res.status(200).json({ user: userDetails })
+        const userObject = user.toObject();
 
+        delete userObject.password;
+        delete userObject.resetPasswordToken;
+
+        return res.status(200).json({ user: userObject });
     } catch (error) {
-        return res.status(500).json({ message: "Internal server Error" })
+        console.error("Error in GetAllDetails:", error);
+
+        // Check if headers are already sent
+        if (!res.headersSent) {
+            return res.status(500).json({ message: "Internal Server Error", error: error.message });
+        }
     }
 }
-
 
 const controller = {
     RagisterUser,
@@ -219,7 +226,7 @@ const controller = {
     ResetPassword,
     Logout,
     UpdateProfile,
-    GetAllDetails
+    getUser
 }
 
 export default controller;

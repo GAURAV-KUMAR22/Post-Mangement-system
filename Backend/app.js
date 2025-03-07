@@ -30,10 +30,7 @@ app.use(cors({
 }));
 
 
-app.use((req, res, next) => {
-    console.log(req);
-    next()
-})
+
 // Routes
 app.use('/api/auth', AuthRoute);
 app.use('/api', PostsRoute);
@@ -41,7 +38,7 @@ app.use('/api', PostsRoute);
 // Error-handling middleware (catch all)
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({ message: 'Internal Server Error' });
+    return res.status(500).json({ message: 'Internal Server Error' });
 });
 
 // Start the server
