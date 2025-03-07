@@ -30,7 +30,7 @@ app.use(cors({
 }));
 
 
-app.use((req, res,next)=>{
+app.use((req, res, next) => {
     console.log(req);
     next()
 })

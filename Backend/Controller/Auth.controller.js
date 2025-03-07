@@ -6,10 +6,8 @@ import crypto from 'crypto';
 
 async function RagisterUser(req, res, next) {
     const data = req.body;
-    console.log(data)
     try {
         const { userName, email, password } = data;
-        console.log(userName, email, password)
         if (!userName || !email || !password) {
             return res.status(400).json({ message: 'all fileds are required' })
         };
@@ -19,7 +17,7 @@ async function RagisterUser(req, res, next) {
             return res.status(400).json({ message: 'User already ragistered with email' })
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        console.log(hashedPassword)
+
         const newUser = new User({
             userName,
             email,
@@ -48,7 +46,7 @@ async function LoginUser(req, res, next) {
 
         const Token = JWT.sign({ id: existingUser._id, email: email }, process.env.SECRET_KEY);
         const payload = { Token: Token, UserName: existingUser.userName }
-        res.status(200).send({ message: 'User Login Succussfully', payload });
+        return res.status(200).send({ message: 'User Login Succussfully', payload });
 
     } catch (error) {
         return res.status(500).json({ message: 'Internal server error' })
@@ -58,7 +56,6 @@ async function LoginUser(req, res, next) {
 
 async function ForgotPassword(req, res, next) {
     const data = req.body;
-    console.log("data", data)
     try {
         const { email } = data;
         console.log(email)

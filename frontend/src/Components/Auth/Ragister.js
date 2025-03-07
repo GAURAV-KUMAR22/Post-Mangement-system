@@ -14,7 +14,7 @@ const Register = () => {
         console.log(user);
 
         try {
-            const response = await axios.post('/ragister', user)
+            const response = await InstanceUrl.post('/ragister', user)
 
             if (response.status === 202) {
                 console.log('Registration successful:', response.data);
