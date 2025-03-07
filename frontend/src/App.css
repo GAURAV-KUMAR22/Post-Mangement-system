@@ -1,0 +1,209 @@
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fc;
+  height: 100vh;
+  width: 100%;
+  overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+}
+
+/* Ensure container spans full width */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw; /* Force full width */
+}
+
+/* Header section */
+.header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+/* Body section */
+.body {
+  flex: 1;
+  background-color: white;
+  padding: 20px;
+  font-size: 1.2rem;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Footer section */
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 1rem;
+  width: 100%;
+}
+
+/* Container for the whole registration form */
+* {
+  margin: 0;
+  padding: 0;
+}
+.ragister-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+/* Wrapping div for the form */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.form-wrapper p {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+/* Form container styling */
+.form-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Header styling */
+.form-container h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input field styling */
+.input-tag {
+  margin-bottom: 15px;
+}
+
+.input-tag label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.input-tag input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button-container button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fc;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Wrapper to contain all sections */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Header section */
+.header {
+  background-color: #333;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 1.5rem;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Body section */
+.body {
+  flex: 1;
+  background-color: white;
+  padding: 20px;
+  font-size: 1.2rem;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px; /* To prevent content from overlapping with the fixed header */
+  width: 100%;
+}
+
+/* Footer section */
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 1rem;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}

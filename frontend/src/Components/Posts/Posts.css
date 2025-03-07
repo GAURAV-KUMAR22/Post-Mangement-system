@@ -1,0 +1,123 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid black;
+}
+.postui-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.post {
+  position: relative;
+  width: 300px; /* Adjust width as needed */
+  text-align: center;
+}
+
+.post img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.react-icons-container {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust distance from the image */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.react-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  color: wheat;
+}
+/* Card Container */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  width: 350px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 15px;
+  position: relative;
+  text-align: center;
+}
+
+/* Title Styling */
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Image Styling - Adjusting left */
+.card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  position: relative;
+  left: -20px; /* Moves image slightly to the left */
+}
+
+/* Caption Styling */
+.card-caption {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Icons Container */
+.card-icons {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Icon Styling */
+.card-icon {
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card-icon:hover {
+  transform: scale(1.2);
+  color: #007bff;
+}
+
+.PostUI-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}

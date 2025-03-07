@@ -1,0 +1,75 @@
+/* General header styling */
+.header-container {
+  width: 100vw; /* Ensure full viewport width */
+  max-width: 100%; /* Ensure it doesn't shrink */
+  background-color: #333;
+  color: white;
+  box-sizing: border-box; /* Ensures padding doesn’t break width */
+}
+
+/* Flexbox for positioning */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+/* Left side styling */
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.left .logo {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.left h2 {
+  margin-right: 20px;
+  font-size: 1.5rem;
+}
+
+.left a {
+  margin-right: 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.left a:hover {
+  color: #4caf50;
+}
+
+/* Right side styling */
+.right {
+  display: flex;
+  align-items: center;
+  justify-items: flex-end;
+}
+
+.right-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+.right h3 {
+  margin-right: 20px;
+  font-size: 1.2rem;
+}
+
+.right a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.right a:hover {
+  color: #4caf50;
+}
