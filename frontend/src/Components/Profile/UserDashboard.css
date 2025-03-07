@@ -1,0 +1,93 @@
+/* Container Styling */
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+/* Card Styling */
+.dashboard-card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 350px;
+}
+
+.dashboard-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Profile Image Section */
+.profile-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  object-fit: cover;
+  background-color: #e0e0e0;
+}
+
+/* Edit Icon */
+.edit-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 100px;
+  background: white;
+  border: none;
+  border-radius: 100%;
+  padding: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.edit-icon:hover {
+  background: #e0e0e0;
+}
+
+/* User Details */
+.user-details {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #555;
+}
+
+.user-details p {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-details span {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Update Profile Button */
+.update-button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.update-button:hover {
+  background-color: #0056b3;
+}

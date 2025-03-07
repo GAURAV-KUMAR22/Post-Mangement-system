@@ -8,8 +8,9 @@ import ProtectedRoute from './services/ProtectedRoute';
 import { Bounce, ToastContainer } from 'react-toastify';
 import NewPost from './Components/Posts/NewPost';
 import PostUi from './Components/Posts/PostUi';
-import GetUser from './Components/Profile/GetUser';
+import GetUser from './Components/Profile/UserDashboard';
 import Header from './Components/Ui/Header';
+import UserDashboard from './Components/Profile/UserDashboard';
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
             <Route path='/reset-password/?' element={<ResetPassword />}></Route>
             <Route path='/new-post' element={<NewPost />}></Route>
             <Route path='/posts' element={<PostUi />}></Route>
-            <Route path='/getuser/:id' element={<GetUser />}></Route>
+            <Route path='/getuser/:id' element={<UserDashboard />}></Route>
           </Route>
         </Routes>
         <ToastContainer
