@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './GetUser.css'
 import { FaPen } from "react-icons/fa";
 import { useLocation, useParams } from 'react-router-dom';
+import InstanceUrl from '../../services/Instance';
 const GetUser = () => {
     const [inputProfile, setinputProfile] = useState(false)
+    const location = useLocation();
     const { id } = useParams();
     console.log(id)
-    const location = useLocation();
-    const user = location.state;
-    console.log(user)
+    console.log(location.state)
+
     function handleProfilePic() {
         setinputProfile(true);
         setTimeout(() => {
