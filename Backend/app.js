@@ -7,7 +7,12 @@ import cors from 'cors'
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import statusMonitor from 'express-status-monitor';
+import path from 'path'
+import { fileURLToPath } from "url";
 
+// Get the __dirname equivalent in ES6
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const app = express();
@@ -29,11 +34,13 @@ app.use(cors({
     credentials: true,
 }));
 
-
+// serve static file
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
-app.use('/api/auth', AuthRoute);
 app.use('/api', PostsRoute);
+app.use('/api/auth', AuthRoute);
+
 
 // Error-handling middleware (catch all)
 app.use((err, req, res, next) => {

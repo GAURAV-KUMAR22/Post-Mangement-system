@@ -13,8 +13,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    profile: {
-        type: String
+    profileImage: {
+        type: String,
+        default: "https://yourdomain.com/default-profile.png"
     }
     ,
     createdAt: {

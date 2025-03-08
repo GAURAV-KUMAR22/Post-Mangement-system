@@ -160,26 +160,24 @@ async function Logout(req, res, next) {
 };
 
 async function UpdateProfile(req, res, next) {
-    const data = req.body;
-    const id = req.params;
-    console.log(data, id)
-
-
-    const { profile } = data;
+    if (!req.file) {
+        return res.status(400).json({ message: "No file uploaded" });
+    }
+    const profileImage = req.file;
+    const { id } = req.params;
     if (!id) {
         return res.status(400).json({ message: "Id Does not exist" })
     }
-    const existingUser = await User.findOne({ _id: id }).exec();
+    const existingUser = await User.findOne({ _id: id })
 
     if (!existingUser) {
         return res.status(400).json({ message: "User Does not exist" })
     };
 
-    const user = new User({
-        profile: profile
-    })
-
-    await user.save();
+    const updateduser = await User.findByIdAndUpdate(id, { profileImage: profileImage.filename }, { new: true })
+    if (!updateduser) {
+        return res.status(404).json({ message: "User not found" });
+    }
     return res.status(200).send({ message: "Profile-picture successfully updated" })
 
 };
@@ -219,6 +217,11 @@ async function getUser(req, res, next) {
     }
 }
 
+const getStaticfile = async (req, res, next) => {
+    const id = req.params;
+
+}
+
 const controller = {
     RagisterUser,
     LoginUser,
@@ -226,7 +229,8 @@ const controller = {
     ResetPassword,
     Logout,
     UpdateProfile,
-    getUser
+    getUser,
+    getStaticfile
 }
 
 export default controller;
