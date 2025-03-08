@@ -9,6 +9,7 @@ import { Bounce, ToastContainer } from 'react-toastify';
 import NewPost from './Components/Posts/NewPost';
 import PostUi from './Components/Posts/PostUi';
 import UserDashboard from './Components/Profile/UserDashboard';
+import Layout from './Components/Layout/Layout';
 
 function App() {
 
@@ -19,12 +20,14 @@ function App() {
           <Route index path='/ragister' element={<Ragister />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route element={<ProtectedRoute />}>
-            <Route path='/' element={<Home />}></Route>
-            <Route path='/forgot-password' element={<ForgotPassword />}></Route>
-            <Route path='/reset-password/?' element={<ResetPassword />}></Route>
-            <Route path='/new-post' element={<NewPost />}></Route>
-            <Route path='/posts' element={<PostUi />}></Route>
-            <Route path='/getuser/:id' element={<UserDashboard />}></Route>
+            <Route path="/" element={<Layout />}>
+              <Route path='/' element={<Home />}></Route>
+              <Route path='/forgot-password' element={<ForgotPassword />}></Route>
+              <Route path='/reset-password/?' element={<ResetPassword />}></Route>
+              <Route path='/new-post' element={<NewPost />}></Route>
+              <Route path='/posts' element={<PostUi />}></Route>
+              <Route path='/getuser/:id' element={<UserDashboard />}></Route>
+            </Route>
           </Route>
         </Routes>
         <ToastContainer

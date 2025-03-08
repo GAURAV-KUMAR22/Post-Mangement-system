@@ -32,9 +32,6 @@ const Header = () => {
         }
     }
 
-    function handleUserMenu() {
-        let menu = document.createElement('di')
-    }
     return (
         <div className='header-container'>
             <header className='header'>
@@ -51,7 +48,6 @@ const Header = () => {
                     <div className='right-icons'>
                         {token ? (<button className="btn btn-primary" onClick={handleLogout}>Logout</button>) : (<Link to='/login'>Login</Link>)}
                         <div>
-                            {/* <button onClick={handleUserMenu}><TiThMenu fill='black' size={40} /></button> */}
                             <Header_menu />
                         </div>
                     </div>

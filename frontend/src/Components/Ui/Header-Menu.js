@@ -34,6 +34,17 @@ const Header_menu = () => {
         setUser(User);
         console.log(user)
         navigate(`/getuser/${id}`, { state: user })
+    };
+
+    const handleLogout = async () => {
+        const responce = await InstanceUrl.get('/logout');
+        if (!responce) {
+            throw new Error({ message: 'responce does not ok' })
+        }
+
+        if (responce.status === 200) {
+            navigate('/login')
+        }
     }
 
     return (
@@ -61,7 +72,7 @@ const Header_menu = () => {
                 <MenuItem onClick={handleClose}>
                     Profile
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleLogout}>
                     Logout
                 </MenuItem>
             </Menu>

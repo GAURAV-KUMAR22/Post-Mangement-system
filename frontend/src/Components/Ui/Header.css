@@ -1,75 +1,96 @@
-/* General header styling */
+/* Header container takes full width */
 .header-container {
-  width: 100vw; /* Ensure full viewport width */
-  max-width: 100%; /* Ensure it doesn't shrink */
-  background-color: #333;
-  color: white;
-  box-sizing: border-box; /* Ensures padding doesn’t break width */
+  width: 100%;
+  background-color: #24292e;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Flexbox for positioning */
+/* Main header styles */
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: 10px 20px;
-  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
 }
 
-/* Left side styling */
+/* Left side (Logo & Navigation) */
 .left {
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
-.left .logo {
-  width: 40px;
-  height: 40px;
-  background-color: #fff;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.left h2 {
-  margin-right: 20px;
-  font-size: 1.5rem;
-}
-
-.left a {
-  margin-right: 20px;
-  color: white;
-  text-decoration: none;
-  font-size: 1.1rem;
-}
-
-.left a:hover {
-  color: #4caf50;
-}
-
-/* Right side styling */
+/* Right side (Logout & Menu) */
 .right {
   display: flex;
   align-items: center;
-  justify-items: flex-end;
+  gap: 15px;
 }
 
+/* Right icons container */
 .right-icons {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  gap: 20px;
-}
-.right h3 {
-  margin-right: 20px;
-  font-size: 1.2rem;
+  align-items: center;
+  gap: 10px; /* Space between Logout and Menu */
 }
 
-.right a {
+/* Links */
+.header a {
   color: white;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 16px;
+  transition: color 0.3s ease;
 }
 
-.right a:hover {
-  color: #4caf50;
+.header a:hover {
+  color: #58a6ff;
+}
+
+/* Button styles */
+.btn {
+  background-color: #0366d6;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* Menu Icon */
+.menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  padding: 5px;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 8px 10px;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .header a {
+    font-size: 14px;
+  }
 }

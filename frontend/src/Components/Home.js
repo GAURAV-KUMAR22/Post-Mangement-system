@@ -17,7 +17,7 @@ const Home = () => {
                 <Header token={token} />
             </div>
             <div className='body'>
-                <h1>I am: {User}</h1>
+                <h1>Hey {User}</h1>
             </div>
             <div className='footer'>Footer</div>
         </div>

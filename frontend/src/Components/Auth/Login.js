@@ -24,7 +24,7 @@ const Login = () => {
         if (Responce.status === 200) {
             toast.success('You are successfully Login', {
                 position: "top-center",
-                autoClose: 10000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: false,
                 pauseOnHover: true,
