@@ -19,7 +19,6 @@ const Home = () => {
             <div className='body'>
                 <h1>Hey {User}</h1>
             </div>
-            <div className='footer'>Footer</div>
         </div>
     )
 }

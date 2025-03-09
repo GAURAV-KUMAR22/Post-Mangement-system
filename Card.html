@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      :root {
+        --clr-gray-dark: #d5dbdb;
+      }
+      * {
+        box-sizing: border-box;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        margin: 2rem;
+        color: var(--clr-gray-dark);
+      }
+
+      .card {
+        overflow: hidden;
+        box-shadow: 0px 2px 20px var(--clr-gray-dark);
+        background-color: white;
+        border-radius: 0.5rem;
+        position: relative;
+        width: 600px;
+        margin: 1rem;
+        transition: 250ms all ease-in-out;
+        cursor: pointer;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 2px 40px var(--clr-gray-dark);
+      }
+
+      .banner-img {
+        position: absolute;
+        object-fit: cover;
+        height: 14rem;
+        width: 100%;
+      }
+
+      .category-tag-popular {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: white;
+        background-color: red;
+        padding: 0.5rem 1.3rem 0.5rem 1rem;
+        text-transform: uppercase;
+        position: absolute;
+        z-index: 1;
+        top: 1rem;
+        border-radius: 0 2rem 2rem 0;
+      }
+
+      .card-body {
+        margin: 15rem 1rem 1rem 1rem;
+      }
+
+      .card-hastag {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: blue;
+      }
+
+      .card-title {
+        line-height: 1.5rem;
+        margin: 1rem 0 0.5rem;
+        color: grey;
+      }
+
+      .card-description {
+        color: blue;
+        font-size: 0.9rem;
+      }
+
+      .card-profile {
+        display: flex;
+        margin-top: 2rem;
+        align-items: center;
+      }
+
+      .profile-img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .card-profile-info {
+        margin-left: 2rem;
+      }
+      .profile-name {
+        font-size: 1rem;
+        color: gray;
+      }
+
+      .profile-followers {
+        font-size: 0.9rem;
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="card-Banner">
+        <p class="category-tag-popular">Popular</p>
+        <img
+          class="banner-img"
+          src="./Backend/uploads/1741449915753-510426615-1741449915753-travel.jpg"
+        />
+      </div>
+      <div class="card-body">
+        <div class="card-hastag">#insta #love</div>
+        <h2 class="card-title">New Destination</h2>
+        <div class="card-description">hei i am going to travel.</div>
+        <div class="card-profile">
+          <img
+            class="profile-img"
+            src="./Backend/uploads/1741450593151-739020714-1741450593151-gaurav collpol photo.jpeg"
+          />
+          <div class="card-profile-info">
+            <h3 class="profile-name">Gaurav Kumar</h3>
+            <p class="profile-followers">1.2k</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,14 +1,13 @@
 import express from 'express'
-import controller from '../Controller/Posts.controller.js';
-import multer from "multer";
 const route = express.Router();
+import controller from '../Controller/Posts.controller.js';
+import upload from '../Services/Multer.js';
+import AuthenticationCheck from '../Services/Auth.middleware.js';
+import convertImage from '../Utils/ImageConverter.js';
 
 
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
-route.get('/posts', controller.getPost)
-route.post('/post', upload.single('image'), controller.postPost)
-route.delete('/posts')
+route.get('/posts', controller.getAllPost)
+route.post('/new-post', AuthenticationCheck, upload.single('image'), controller.newPost)
+route.get('/post', AuthenticationCheck, controller.getPost)
 export default route;

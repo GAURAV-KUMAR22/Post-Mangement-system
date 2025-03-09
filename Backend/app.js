@@ -38,8 +38,8 @@ app.use(cors({
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
-app.use('/api', PostsRoute);
 app.use('/api/auth', AuthRoute);
+app.use('/api', PostsRoute);
 
 
 // Error-handling middleware (catch all)

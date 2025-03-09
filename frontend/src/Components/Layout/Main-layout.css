@@ -1,0 +1,94 @@
+.container-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh; /* Ensures full height */
+}
+
+.main-container {
+  flex: 1; /* Allows the main content to take available space */
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+nav {
+  position: relative;
+  z-index: 10; /* Ensures it stays above cards */
+}
+
+/* Top Navbar */
+.main-navbar {
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navbar Links */
+.main-navbar nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+.main-navbar nav a:hover {
+  text-decoration: underline;
+}
+
+/* Main Content Layout */
+.main-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f4f4;
+  padding-top: 5rem;
+  margin-top: 5rem;
+}
+
+/* Dashboard Layout */
+.dashboard {
+  display: grid;
+  grid-template-columns: 250px 1fr; /* Sidebar 250px, Main Content fills rest */
+  width: 100%;
+  height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  background: #444;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar nav a {
+  display: block;
+  color: white;
+  padding: 10px 0;
+  text-decoration: none;
+}
+
+.sidebar nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Main Content */
+.content {
+  background: white;
+  padding: 20px;
+}
+
+/* Login Page (If Not Authenticated) */
+.auth-container {
+  background: white;
+  padding: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.content {
+  margin-top: 50px;
+}

@@ -3,7 +3,7 @@ import JWT from 'jsonwebtoken'
 import bcrypt from 'bcrypt';
 import nodemailer from 'nodemailer'
 import crypto from 'crypto';
-import mongoose, { get } from "mongoose";
+import mongoose from "mongoose";
 
 async function RagisterUser(req, res, next) {
     const data = req.body;
@@ -65,7 +65,6 @@ async function ForgotPassword(req, res, next) {
         };
 
         const existingUser = await User.findOne({ email });
-        console.log(existingUser)
         if (!existingUser) {
             return res.status(400).json({ message: 'User does not Exist' })
         }
@@ -74,8 +73,6 @@ async function ForgotPassword(req, res, next) {
             return res.status(400).json({ message: 'you send email check this' })
         }
         const resetToken = crypto.randomBytes(32).toString('hex');
-
-        console.log("reset", resetToken);
 
         existingUser.resetPasswordToken = resetToken;
         existingUser.resetPasswordExpire = Date.now() + 3600000;
@@ -217,11 +214,6 @@ async function getUser(req, res, next) {
     }
 }
 
-const getStaticfile = async (req, res, next) => {
-    const id = req.params;
-
-}
-
 const controller = {
     RagisterUser,
     LoginUser,
@@ -229,8 +221,7 @@ const controller = {
     ResetPassword,
     Logout,
     UpdateProfile,
-    getUser,
-    getStaticfile
+    getUser
 }
 
 export default controller;

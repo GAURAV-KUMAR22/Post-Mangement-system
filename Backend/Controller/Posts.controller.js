@@ -3,92 +3,70 @@ import sharp from 'sharp';
 import crypto from 'crypto';
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import Posts from '../Model/post.model.js'
+import User from '../Model/Auth.model.js';
+import upload from '../Services/Multer.js';
 
-async function postPost(req, res, next) {
-
-    const inputBuffer = req.file.buffer;
+async function newPost(req, res, next) {
     try {
+        const postData = req.body;
+        const postImage = req.file;
+        const userid = req.user.id;
 
-        const s3 = new S3Client({
-            credentials: {
-                accessKeyId: process.env.ACCESS_KEY,
-                secretAccessKey: process.env.SECRET_ACCESS_KEY,
-            },
-            region: process.env.AWS_REGION || "eu-north-1",
+        if (!postData || !postImage || !userid) {
+            return res.status(400).json({ message: 'All fields are required' })
+        };
+
+        const existingUser = await User.findById({ _id: userid });
+        if (!existingUser) {
+            return res.status(400).json({ message: "User does not found" })
+        };
+        console.log(req.file.buffer)
+        const postimagepath = await sharp(req.file.buffer)
+            .jpeg({ quality: 80 }) // Convert to JPEG
+            .toFile('./uploads');
+        console.log(postimagepath)
+        const post = new Posts({
+            title: postData.title,
+            imagename: `http:localhost:5000/uploads/${postimagepath}`,
+            content: postData.caption
         });
-
-        const buffer = await sharp(inputBuffer).resize({
-            width: 200,
-            height: 100,
-        }).toBuffer();
-
-
-        const randomImag = crypto.randomBytes(2).toString('hex');
-        const randomImageName = `${req.file.originalname}_${randomImag}`
-
-        const params = ({
-            "Bucket": process.env.BUCKET_NAME,
-            "Key": randomImageName,
-            "Body": buffer,
-            "ContentType": req.file.mimetype,
-        });
-        const command = new PutObjectCommand(params);
-        if (buffer) {
-            const newPost = new Posts({
-                title: req.file.originalname,
-                imagename: randomImageName,
-                content: req.body.caption,
-            });
-            await s3.send(command);
-            const data = await newPost.save();
-            res.status(200).json({ data: data })
-        }
-
+        await post.save();
+        return res.status(200).json({ message: 'posted', post })
     } catch (error) {
-        return console.log(error)
+        return res.status(500).json({ message: "Internal server error" })
     }
 }
 
-async function getPost(req, res, next) {
-    let postArray = [];
+async function getAllPost(req, res, next) {
     try {
-        const s3 = new S3Client({
-            credentials: {
-                accessKeyId: process.env.ACCESS_KEY,
-                secretAccessKey: process.env.SECRET_ACCESS_KEY,
-            },
-            region: process.env.AWS_REGION || "eu-north-1",
-        });
-        const posts = await Posts.find();
-        for (const post of posts) {
-            const getObjectParams = {
-                "Bucket": process.env.BUCKET_NAME,
-                "Key": post.imagename
-            };
-            const command = new GetObjectCommand(getObjectParams);
+        const posts = await Posts.find({}).limit(10);
 
-            const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
-            const postData = {
-                postId: post.id,
-                postTitle: post.title,
-                postImage: post.imagename,
-                postcontent: post.content,
-                postTime: post.createdAt,
-                postUrl: url
-            }
-
-            postArray.push(postData)
+        if (!posts) {
+            return res.status(400).json({ message: 'post not found' })
         }
-        return res.status(200).json({ data: postArray })
+
+        return res.status(200).json({ posts: posts })
     } catch (error) {
-        console.log(error)
+        return res.status(500).json({ message: 'Internal server error', error })
+    }
+}
+
+const getPost = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        if (!userId) {
+            return res.status(400).json({ message: 'user does not exist' })
+        }
+
+    } catch (error) {
+        return res.status(500).json({ message: 'Internal server error', error })
     }
 }
 
 const controller = {
-    postPost,
-    getPost,
-    // prisma
+    getAllPost,
+    newPost,
+    getPost
 }
 
 export default controller;

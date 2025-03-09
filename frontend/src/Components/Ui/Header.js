@@ -37,7 +37,7 @@ const Header = () => {
             <header className='header'>
                 <div className='left'>
                     <div className='logo'></div>
-                    <h2>Your Website</h2>
+                    <h2>FRIEND-CIRCLE</h2>
                     {token && (<><Link to={'/posts'}>Home</Link>
                         <Link to={'/new-post'}>Create-Post</Link>
                         <Link to={'/mangement'}>Mangement</Link></>)}
