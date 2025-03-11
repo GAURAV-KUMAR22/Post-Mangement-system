@@ -45,25 +45,11 @@ app.use(cookieParser())
 
 // CORS middleware with dynamic origin check for production
 
-
-const allowedOrigins = [
-    process.env.FRONTEND_BASE_URL, // Use frontend URL from .env file
-];
-
-app.use(
-    cors({
-        origin: function (origin, callback) {
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                callback(new Error("Not allowed by CORS"));
-            }
-        },
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"],
-        credentials: true, // Allow cookies (if needed)
-    })
-);
+app.use(cors({
+    origin: "*", // Change this to your frontend domain when deploying
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization"
+}))
 
 
 
