@@ -45,11 +45,8 @@ app.use(cookieParser())
 
 // CORS middleware with dynamic origin check for production
 
-app.use(cors({
-    origin: "*", // Change this to your frontend domain when deploying
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization"
-}))
+app.use(cors({ origin: "http://13.126.102.128:3000", credentials: true }));
+
 
 
 
