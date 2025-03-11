@@ -1,7 +1,5 @@
 import React from 'react'
-// import { FaRegComment } from 'react-icons/fa';
-// import { AiOutlineLike } from "react-icons/ai";
-// import { LiaCommentSolid } from "react-icons/lia";
+
 import './Card.css'
 export const Card = ({ post }) => {
     const imagepath = post.imagename;

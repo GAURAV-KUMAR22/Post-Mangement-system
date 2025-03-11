@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from '../Ui/Header'
 import { Outlet } from 'react-router-dom'
-import Sidebar from '../Ui/Sidebar'
 
 const Layout = () => {
     let isAuthenticated = true;

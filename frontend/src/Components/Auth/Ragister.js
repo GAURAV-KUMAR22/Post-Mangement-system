@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../App.css';
 import InstanceUrl from '../../services/Instance';
-import axios from "axios";
 const Register = () => {
     const navigate = useNavigate();
 

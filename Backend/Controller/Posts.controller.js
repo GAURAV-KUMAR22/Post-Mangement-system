@@ -25,7 +25,6 @@ async function newPost(req, res, next) {
             .jpeg({ quality: 80 }) // Convert to JPEG
             .toFile('../uploads');
 
-        console.log("post", postimagepath)
         const post = new Posts({
             title: postData.title,
             imagename: `http://localhost:5000/uploads/${postImage.filename}`,
