@@ -44,7 +44,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
 // CORS middleware with dynamic origin check for production
-app.use(cors());
+
+
+const allowedOrigins = [
+    process.env.FRONTEND_BASE_URL, // Use frontend URL from .env file
+];
+
+app.use(
+    cors({
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+        credentials: true, // Allow cookies (if needed)
+    })
+);
+
 
 
 // serve static file
