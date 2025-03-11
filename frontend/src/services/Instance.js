@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const InstanceUrl = axios.create({
-    baseURL: 'http://localhost:5000/api/auth/',
+    baseURL: 'http://13.126.102.128:5000/api/auth/',
     timeout: 50000, // Increased timeout to prevent errors
     headers: {
         'Content-Type': 'application/json',
