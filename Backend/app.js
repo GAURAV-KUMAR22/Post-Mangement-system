@@ -45,8 +45,10 @@ app.use(cookieParser())
 
 // CORS middleware with dynamic origin check for production
 
-app.use(cors({ origin: "http://13.126.102.128:3000", credentials: true }));
-
+app.use(cors({ 
+    origin: 'http://localhost:3000',  // Allow frontend origin
+    credentials: true // Allow cookies if needed
+}));
 
 
 
