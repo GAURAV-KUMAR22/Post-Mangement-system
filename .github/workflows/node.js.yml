@@ -1,0 +1,40 @@
+name: Deploy MERN App
+
+on:
+  push:
+    branches:
+      - main  # Runs on every push to the main branch
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Backend Setup
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          npm install
+          pm2 restart backend || pm2 start server.js --name backend
+
+      # Frontend Setup
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm install
+          npm run build
+          sudo rm -rf /var/www/html/*
+          sudo cp -r dist/* /var/www/html/
+
+      # Restart Nginx (For Deployments)
+      - name: Restart Nginx
+        run: |
+          sudo systemctl restart nginx
