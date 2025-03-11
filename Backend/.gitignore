@@ -5,4 +5,5 @@ node_modules/
 *.log
 *.lock
 MySQLDb
+/uploads
 "@ | Out-File -Encoding utf8 .gitignore

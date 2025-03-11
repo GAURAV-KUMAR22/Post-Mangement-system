@@ -20,18 +20,19 @@ dotenv.config();
 
 const app = express();
 // set secure method
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+}));
 // compression file
-function shouldCompress(req, res) {
-    if (req.headers['x-no-compression']) {
-        // don't compress responses with this request header
-        return false
-    }
 
-    // fallback to standard filter function
-    return compression.filter(req, res)
-}
-app.use(compression({ filter: shouldCompress }))
+app.use(compression({
+    level: 6, // Best balance between speed & compression
+    filter: (req, res) => {
+        if (req.headers['x-no-compression']) return false;
+        return compression.filter(req, res);
+    }
+}))
 
 // Database Connection
 DbConnection()
