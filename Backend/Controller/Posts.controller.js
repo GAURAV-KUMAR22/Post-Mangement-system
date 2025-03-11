@@ -20,14 +20,15 @@ async function newPost(req, res, next) {
         if (!existingUser) {
             return res.status(400).json({ message: "User does not found" })
         };
-        console.log(req.file.buffer)
+
         const postimagepath = await sharp(req.file.buffer)
             .jpeg({ quality: 80 }) // Convert to JPEG
-            .toFile('./uploads');
-        console.log(postimagepath)
+            .toFile('../uploads');
+
+        console.log("post", postimagepath)
         const post = new Posts({
             title: postData.title,
-            imagename: `http:localhost:5000/uploads/${postimagepath}`,
+            imagename: `http://localhost:5000/uploads/${postImage.filename}`,
             content: postData.caption
         });
         await post.save();

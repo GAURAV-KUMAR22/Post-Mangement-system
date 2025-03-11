@@ -1,17 +1,20 @@
 import React from 'react'
-import { FaRegComment } from 'react-icons/fa';
-import { AiOutlineLike } from "react-icons/ai";
-import { LiaCommentSolid } from "react-icons/lia";
+// import { FaRegComment } from 'react-icons/fa';
+// import { AiOutlineLike } from "react-icons/ai";
+// import { LiaCommentSolid } from "react-icons/lia";
 import './Card.css'
 export const Card = ({ post }) => {
     console.log(post.imagename)
+    const imagepath = post.imagename;
     return (
         <div className="card">
             <div className="card-Banner">
                 <p className="category-tag-popular">Popular</p>
                 <img
                     className="banner-img"
-                    src={post.imagename}
+                    src={imagepath}
+                    alt='post'
+                    typeof='jpeg'
                 />
             </div>
             <div className="card-body">
@@ -22,7 +25,7 @@ export const Card = ({ post }) => {
                     <img
                         className="profile-img"
                         src={post.imagename}
-                        alt='image'
+                        alt='profile'
                     />
                     <div className="card-profile-info">
                         <h3 className="profile-name">Gaurav Kumar</h3>
@@ -35,19 +38,4 @@ export const Card = ({ post }) => {
 }
 
 
-
-{/* <div className='card-container'>
-    <h3 className='card-title'>{post.title}</h3>
-    <img
-        className='card-image'
-        src={post.imagename}
-        alt='images'
-    />
-    <p className='card-caption'>{post.content}</p>
-
-    <div className='card-icons'>
-        <AiOutlineLike />
-        <FaRegComment className='card-icon' />
-        <LiaCommentSolid />
-    </div>
-</div > */}
+export default Card;

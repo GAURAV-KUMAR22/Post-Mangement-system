@@ -8,7 +8,7 @@ const PostList = () => {
 
     useEffect(() => {
         const fetchdPosts = async () => {
-            const responce = await InstanceUrlPost('/posts');
+            const responce = await InstanceUrlPost.get('/posts');
             if (!responce) {
                 throw new Error({ message: 'Bad Responce' })
             }
@@ -22,7 +22,7 @@ const PostList = () => {
     return (
         <div className='Postlist-container'>
             <div className='card-postlist'>
-                {posts.map((post) => (<ul><li><Card post={post} /></li></ul>))}
+                {posts.map((post) => (<ul><li key={post._id}><Card post={post} /></li></ul>))}
             </div>
         </div>
     )

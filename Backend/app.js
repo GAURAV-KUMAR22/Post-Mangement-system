@@ -1,4 +1,6 @@
 import express from 'express';
+import helmet from 'helmet';
+import compression from 'compression';
 // import http from 'http';
 import AuthRoute from './Router/Auth.route.js'
 import PostsRoute from './Router/Post.route.js'
@@ -10,12 +12,26 @@ import statusMonitor from 'express-status-monitor';
 import path from 'path'
 import { fileURLToPath } from "url";
 
-// Get the __dirname equivalent in ES6
+
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(__filename)
+
 dotenv.config();
 
 const app = express();
+// set secure method
+app.use(helmet());
+// compression file
+function shouldCompress(req, res) {
+    if (req.headers['x-no-compression']) {
+        // don't compress responses with this request header
+        return false
+    }
+
+    // fallback to standard filter function
+    return compression.filter(req, res)
+}
+app.use(compression({ filter: shouldCompress }))
 
 // Database Connection
 DbConnection()
@@ -27,12 +43,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
 // CORS middleware with dynamic origin check for production
+const allowedOrigins = [process.env.FRONTEND_BASE_URL, 'http://localhost:3000'];
+
 app.use(cors({
-    origin: process.env.FRONTEND_BASE_URL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true
 }));
+
 
 // serve static file
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));

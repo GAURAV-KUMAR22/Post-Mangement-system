@@ -1,37 +1,32 @@
-import multer from "multer";
-import sharp from "sharp";
-import path from "path";
-import fs from "fs";
+import path from 'path';
+import sharp from 'sharp';
+import { fileURLToPath } from 'url';
 
-// Use memory storage to get the file as a buffer
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Middleware to convert PNG to JPEG
-const convertImage = async (req, res, next) => {
-    if (!req.file) return next();
-
-    // Define the new file name and path
-    const filename = `image-${Date.now()}.jpeg`;
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const uploadDir = path.join(__dirname, "../uploads");
-    const outputPath = path.join(uploadDir, filename);
+const uploadDir = path.join(__dirname, "../uploads");
+// Middleware to process and convert image to JPEG
+const convertToJpeg = async (req, res, next) => {
+    if (!req.file) {
+        return next();
+    }
 
     try {
-        // Convert PNG to JPEG and save it to disk
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const newFilename = `${uniqueSuffix}.jpeg`;
+        const outputPath = path.join(uploadDir, newFilename);
+
         await sharp(req.file.buffer)
-            .jpeg({ quality: 80 }) // Convert to JPEG format with 80% quality
+            .jpeg({ quality: 80 }) // Convert to JPEG with 80% quality
             .toFile(outputPath);
 
-        // Replace file details in req
-        req.file.filename = filename;
+        req.file.filename = newFilename; // Override filename
         req.file.path = outputPath;
         next();
-    } catch (error) {
-        console.error("Image conversion failed:", error);
-        res.status(500).json({ message: "Image conversion failed" });
+    } catch (err) {
+        next(err);
     }
 };
 
-export default convertImage;
+export default convertToJpeg;

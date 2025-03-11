@@ -2,6 +2,8 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import sharp from 'sharp';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -11,16 +13,19 @@ if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-const storage = multer.diskStorage({
-    destination: function (req, res, cb) {
-        cb(null, uploadDir)
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + '-' + Date.now() + '-' + file.originalname.trim(' '))
-    }
-})
-const upload = multer({ storage: storage });
+// Multer storage configuration (temporarily stores file)
+const storage = multer.memoryStorage(); // Store in memory for processing
 
+const upload = multer({
+    storage: storage,
+    fileFilter: function (req, file, cb) {
+        const allowedTypes = ["image/png", "image/jpg", "image/jpeg", "image/webp", "image/gif"];
+        if (allowedTypes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error("Only image files are allowed"), false);
+        }
+    }
+});
 
 export default upload;

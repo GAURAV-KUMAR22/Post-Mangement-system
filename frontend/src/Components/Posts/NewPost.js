@@ -34,6 +34,7 @@ const NewPost = () => {
                     <div className="input-tag">
                         <label>Title</label>
                         <input type='text' name='title' onChange={(e) => setTitle(e.target.value)} />
+                        <p>*image will be jpeg formet</p>
                         <input type='file' name='postImage' onChange={(e) => setImage(e.target.files[0])} accept='image/*' />
                         <label>Caption</label>
                         <input type='text' name='caption' onChange={(e) => setCaption(e.target.value)} />
