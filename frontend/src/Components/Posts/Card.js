@@ -4,7 +4,6 @@ import React from 'react'
 // import { LiaCommentSolid } from "react-icons/lia";
 import './Card.css'
 export const Card = ({ post }) => {
-    console.log(post.imagename)
     const imagepath = post.imagename;
     return (
         <div className="card">

@@ -6,8 +6,8 @@ import crypto from 'crypto';
 import mongoose from "mongoose";
 
 async function RagisterUser(req, res, next) {
-    const data = req.body;
     try {
+        const data = req.body;
         const { userName, email, password } = data;
         if (!userName || !email || !password) {
             return res.status(400).json({ message: 'all fileds are required' })
@@ -33,8 +33,8 @@ async function RagisterUser(req, res, next) {
 }
 
 async function LoginUser(req, res, next) {
-    const data = req.body;
     try {
+        const data = req.body;
         const { email, password } = data;
         if (!email || !password) {
             return res.status(400).json({ message: 'All fields are required' });
@@ -56,8 +56,8 @@ async function LoginUser(req, res, next) {
 
 
 async function ForgotPassword(req, res, next) {
-    const data = req.body;
     try {
+        const data = req.body;
         const { email } = data;
         console.log(email)
         if (!email) {
@@ -105,9 +105,9 @@ async function ForgotPassword(req, res, next) {
 };
 
 async function ResetPassword(req, res, next) {
-    const data = req.body;
-    const existingToken = req.query.token;
     try {
+        const data = req.body;
+        const existingToken = req.query.token;
         const { email, password } = data;
         if (!email || !password) {
             return res.status(400).json({ message: 'All fields are required' })
@@ -141,8 +141,8 @@ async function ResetPassword(req, res, next) {
 };
 
 async function Logout(req, res, next) {
-    const User = await req.user;
     try {
+        const User = await req.user;
         if (!User) {
             return res.status(400).json({ message: 'did not found user' })
         }
@@ -179,18 +179,15 @@ async function UpdateProfile(req, res, next) {
 
 };
 async function getUser(req, res, next) {
-    const userId = req.params.id;
     try {
-
+        const userId = req.params.id;
         if (!userId) {
             return res.status(401).json({ message: "Unauthorized: No user found" });
         }
 
-
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             return res.status(400).json({ message: "Invalid user ID format" });
         }
-
 
         const user = await User.findById(userId).select("-password -resetPasswordToken");
 
@@ -205,12 +202,7 @@ async function getUser(req, res, next) {
 
         return res.status(200).json({ user: userObject });
     } catch (error) {
-        console.error("Error in GetAllDetails:", error);
-
-        // Check if headers are already sent
-        if (!res.headersSent) {
-            return res.status(500).json({ message: "Internal Server Error", error: error.message });
-        }
+        return res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
 }
 
