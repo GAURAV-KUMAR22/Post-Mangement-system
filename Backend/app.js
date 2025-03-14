@@ -52,19 +52,15 @@ app.use(cors({
     credentials: true
 }));
 
-<<<<<<< HEAD
 // sent headers for cross origin resource use
 app.use((req, res, next) => {
     res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
     next();
 });
-=======
 app.use(cors({ 
     origin: 'http://localhost:3000',  // Allow frontend origin
     credentials: true // Allow cookies if needed
 }));
-
->>>>>>> 3f446b0af1e1f0c1ec0227da6993c5e6e8d1a54a
 
 
 // serve static file
