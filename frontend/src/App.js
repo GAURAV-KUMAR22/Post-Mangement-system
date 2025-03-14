@@ -9,7 +9,7 @@ import { Bounce, ToastContainer } from 'react-toastify';
 import NewPost from './Components/Posts/NewPost';
 import UserDashboard from './Components/Profile/UserDashboard';
 import Layout from './Components/Layout/Layout';
-import PostList from './Components/Posts/PostList';
+import PostList from './Components/Posts/PostList'
 import './App.css'
 
 function App() {
