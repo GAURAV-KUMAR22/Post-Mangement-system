@@ -11,7 +11,6 @@ import cookieParser from 'cookie-parser';
 import statusMonitor from 'express-status-monitor';
 import path from 'path'
 import { fileURLToPath } from "url";
-import Posts from './Model/post.model.js';
 
 
 const __filename = fileURLToPath(import.meta.url);

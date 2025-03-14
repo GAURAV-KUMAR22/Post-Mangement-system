@@ -4,7 +4,7 @@ import { Card } from './Card.js';
 import './PostList.css'
 const PostList = () => {
     const [posts, setPosts] = useState([{}]);
-
+    console.log('iin postlist')
 
     useEffect(() => {
         const fetchdPosts = async () => {
