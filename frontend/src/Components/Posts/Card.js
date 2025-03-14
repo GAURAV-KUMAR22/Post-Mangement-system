@@ -1,18 +1,18 @@
 import React from 'react'
-
+import { SlLike } from "react-icons/sl";
+import { SlDislike } from "react-icons/sl";
 import './Card.css'
 export const Card = ({ post }) => {
-    const imagepath = post.imagename;
+    if (!post) return null;
     return (
         <div className="card">
+            <img
+                className="banner-img"
+                src={post.imagename}
+                alt='post'
+            />
             <div className="card-Banner">
                 <p className="category-tag-popular">Popular</p>
-                <img
-                    className="banner-img"
-                    src={imagepath}
-                    alt='post'
-                    typeof='jpeg'
-                />
             </div>
             <div className="card-body">
                 <div className="card-hastag">#insta #love</div>
@@ -21,12 +21,15 @@ export const Card = ({ post }) => {
                 <div className="card-profile">
                     <img
                         className="profile-img"
-                        src={post.imagename}
+                        src={post.user.profileImage}
                         alt='profile'
                     />
                     <div className="card-profile-info">
-                        <h3 className="profile-name">Gaurav Kumar</h3>
+                        <h3 className="profile-name">{post.user.userName}</h3>
                         <p className="profile-followers">1.2k</p>
+                    </div>
+                    <div className='icons'>
+                        <p><SlLike /> <SlDislike /></p>
                     </div>
                 </div>
             </div>

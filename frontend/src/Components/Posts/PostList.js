@@ -12,17 +12,18 @@ const PostList = () => {
             if (!responce) {
                 throw new Error({ message: 'Bad Responce' })
             }
-            const posts = responce.data.posts
+            const posts = responce.data.posts;
+            console.log(posts)
             setPosts(posts)
         };
 
         fetchdPosts();
     }, []);
-    console.log(posts)
+    console.log(posts[0].user)
     return (
         <div className='Postlist-container'>
             <div className='card-postlist'>
-                {posts.map((post) => (<ul><li key={post._id}><Card post={post} /></li></ul>))}
+                {posts.map((post) => (<ul key={post._id}><li key={post._id}><Card post={post} /></li></ul>))}
             </div>
         </div>
     )

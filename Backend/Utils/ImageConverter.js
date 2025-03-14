@@ -11,7 +11,6 @@ const convertToJpeg = async (req, res, next) => {
     if (!req.file) {
         return next();
     }
-
     try {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         const newFilename = `${uniqueSuffix}.jpeg`;

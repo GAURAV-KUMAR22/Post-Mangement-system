@@ -11,6 +11,7 @@ import cookieParser from 'cookie-parser';
 import statusMonitor from 'express-status-monitor';
 import path from 'path'
 import { fileURLToPath } from "url";
+import Posts from './Model/post.model.js';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -44,10 +45,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
 // CORS middleware with dynamic origin check for production
+app.use(cors({
+    origin: process.env.FRONTEND_BASE_URL,
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+}));
 
-app.use(cors({ origin: "http://13.126.102.128:3000", credentials: true }));
-
-
+// sent headers for cross origin resource use
+app.use((req, res, next) => {
+    res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    next();
+});
 
 
 // serve static file

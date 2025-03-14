@@ -5,6 +5,8 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import Posts from '../Model/post.model.js'
 import User from '../Model/Auth.model.js';
 import upload from '../Services/Multer.js';
+import { redis } from '../Services/RedisCashed.js'
+import { profile } from 'console';
 
 async function newPost(req, res, next) {
     try {
@@ -26,11 +28,15 @@ async function newPost(req, res, next) {
             .toFile('../uploads');
 
         const post = new Posts({
+            user: userid,
             title: postData.title,
             imagename: `http://localhost:5000/uploads/${postImage.filename}`,
-            content: postData.caption
+            content: postData.caption,
+
         });
         await post.save();
+
+        await redis.setex(post._id, 3600, JSON.stringify(post));
         return res.status(200).json({ message: 'posted', post })
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" })
@@ -39,13 +45,14 @@ async function newPost(req, res, next) {
 
 async function getAllPost(req, res, next) {
     try {
-        const posts = await Posts.find({}).limit(10);
+        const posts = await Posts.find().populate("user", "userName email profileImage").sort({ createdAt: -1 });
 
         if (!posts) {
             return res.status(400).json({ message: 'post not found' })
         }
-
-        return res.status(200).json({ posts: posts })
+        console.log(posts)
+        let postDetails = posts
+        return res.status(200).json({ posts: postDetails })
     } catch (error) {
         return res.status(500).json({ message: 'Internal server error', error })
     }
