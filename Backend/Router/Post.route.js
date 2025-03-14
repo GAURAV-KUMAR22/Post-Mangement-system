@@ -7,7 +7,7 @@ import convertToJpeg from '../Utils/ImageConverter.js';
 
 
 
-route.get('/posts', controller.getAllPost)
+route.get('/posts', AuthenticationCheck, controller.getAllPost)
 route.post('/new-post', AuthenticationCheck, upload.single('image'), convertToJpeg, controller.newPost)
 route.get('/post', AuthenticationCheck, controller.getPost)
 export default route;

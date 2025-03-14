@@ -165,9 +165,9 @@ async function UpdateProfile(req, res, next) {
     if (!id) {
         return res.status(400).json({ message: "Id Does not exist" })
     }
-    const existingUser = await User.findOne({ _id: id })
+    const loginUser = await User.findOne({ _id: id })
 
-    if (!existingUser) {
+    if (!loginUser) {
         return res.status(400).json({ message: "User Does not exist" })
     };
 
