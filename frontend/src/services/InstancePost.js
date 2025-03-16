@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const InstanceUrlPost = axios.create({
+export const InstanceUrlPost = axios.create({
     baseURL: process.env.PostBeackendUrl,
     timeout: 10000, // Increased timeout to prevent errors
     headers: {
@@ -36,5 +36,3 @@ InstanceUrlPost.interceptors.request.use(
 );
 
 
-
-export default InstanceUrlPost;
