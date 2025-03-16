@@ -6,7 +6,6 @@ import "./PostList.css";
 const PostList = () => {
     const [posts, setPosts] = useState([]);
 
-    console.log("In PostList");
 
     useEffect(() => {
         const fetchdPosts = async () => {
@@ -19,7 +18,6 @@ const PostList = () => {
                 }
 
                 const fetchedPosts = response.data.posts;
-                console.log(fetchedPosts);
                 setPosts(fetchedPosts);
             } catch (error) {
                 console.error("Error fetching posts:", error.message);
