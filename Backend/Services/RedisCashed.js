@@ -6,9 +6,9 @@ const redis = new Redis();
 
 
 const casheData = async (req, res, next) => {
+    console.log(req)
     try {
-        const cashed = await redis.get('user:1');
-        console.log('log1')
+        const cashed = await redis.get();
         if (cashed) {
             return res.json(JSON.parse(cashed));
         };

@@ -11,7 +11,6 @@ import cookieParser from 'cookie-parser';
 import statusMonitor from 'express-status-monitor';
 import path from 'path'
 import { fileURLToPath } from "url";
-import Posts from './Model/post.model.js';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -57,7 +56,7 @@ app.use((req, res, next) => {
     res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
     next();
 });
-app.use(cors({ 
+app.use(cors({
     origin: 'http://localhost:3000',  // Allow frontend origin
     credentials: true // Allow cookies if needed
 }));

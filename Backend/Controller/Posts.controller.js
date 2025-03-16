@@ -46,7 +46,7 @@ async function newPost(req, res, next) {
 async function getAllPost(req, res, next) {
     try {
         const posts = await Posts.find().populate("user", "userName email profileImage").sort({ createdAt: -1 });
-
+        console.log(posts)
         if (!posts) {
             return res.status(400).json({ message: 'post not found' })
         }
