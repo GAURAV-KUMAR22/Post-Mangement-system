@@ -2,11 +2,13 @@ import { Redis } from 'ioredis';
 
 
 
-const redis = new Redis();
+const redis = new Redis({
+    host: 'redis',
+    port: 6379
+});
 
 
 const casheData = async (req, res, next) => {
-    console.log(req)
     try {
         const cashed = await redis.get();
         if (cashed) {

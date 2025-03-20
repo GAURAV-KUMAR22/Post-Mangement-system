@@ -1,6 +1,6 @@
 import User from "../Model/Auth.model.js";
 import JWT from 'jsonwebtoken'
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer'
 import crypto from 'crypto';
 import mongoose from "mongoose";
