@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const InstanceUrlPost = axios.create({
-    baseURL: process.env.PostBeackendUrl,
+    baseURL: 'http://localhost:5000/api/',
     timeout: 10000, // Increased timeout to prevent errors
     headers: {
         'Content-Type': 'application/json',

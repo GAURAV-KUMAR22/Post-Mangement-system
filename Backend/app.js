@@ -1,7 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
 import compression from 'compression';
-// import http from 'http';
 import AuthRoute from './Router/Auth.route.js'
 import PostsRoute from './Router/Post.route.js'
 import DbConnection from './Db/Db.mongo.js'
@@ -75,7 +74,6 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     return res.status(500).json({ message: 'Internal Server Error' });
 });
-
 // Start the server
 const port = process.env.PORT || 5001;
 app.listen(port, () => {

@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const InstanceUrl = axios.create({
-    baseURL: process.env.AuthBackendUrl,
+    baseURL: 'http://localhost:5000/api/auth',
     timeout: 10000, // Increased timeout to prevent errors
     headers: {
         'Content-Type': 'application/json',
